@@ -8,10 +8,13 @@
  * Controller of the angresexaApp
  */
 angular.module('angresexaApp')
-  .controller('UserCtrl',['$scope', function ($scope) {
+  .controller('UserCtrl',['$scope', function ($scope) 
+   {
+     $scope.email = "Sam@Soungue.com";
+     $scope.password = "passw";
       /* -- send login request to server -- */
       $scope.createUser = function() {
-        connectToRest.postUser().save($scope.inputs).$promise.then(
+        connectToRest.postUser().save($scope).$promise.then(           //in a form I would pass $scope.inputs rather than $scope
           function success(response) {
             if(response.error != 0) {
               $scope.hasErrors = true;
