@@ -1,1 +1,51 @@
-<p>This is the user view.</p>
+<form class="form" ng-class="{'has-errors': hasErrors}" ng-submit="createUser()" novalidate>
+
+    <div class="form-row">
+      <label class="form-label">User name*</label>
+      <div class="form-group">
+        <input class="form-input" type="text" ng-model="inputs.nom" ng-click="clearError()" placeholder="">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">Date *</label>
+      <div class="form-group">
+        <input class="form-input" type="text" ng-model="inputs.date" ng-click="clearError()" placeholder="jj/mm/aaaa">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label">Description*</label>
+      <div class="form-group">
+        <textarea class="form-input" ng-model="inputs.description" ng-click="clearError()"></textarea>
+      </div>
+    </div>
+
+    <!-- multi files -->
+    <div class="form-row">
+      <label class="form-label">Album photo</label>
+      <div class="form-group">
+        <div class="form-visual" ngf-select="uploadFiles($files)" multiple accept="image/*">
+          <div svg-include="camera"></div>
+        </div>
+        <ul class="form-visual-list">
+          <li class="form-visual-list-item"  ng-repeat="file in inputs.album">
+            <img class="form-visual-preview" ng-src="{{ baseURL }}{{ file }}">
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- mono file -->
+    <div class="form-row">
+      <label class="form-label">front image</label>
+      <div class="form-group">
+        <div class="form-visual" ngf-select="uploadCouverture($file, $invalidFiles)" accept="image/*" ngf-max-height="2048" ngf-max-size="1MB">
+          <div svg-include="camera"></div>
+          <img class="form-visual-preview" ng-src="{{ baseURL }}{{ inputs.couverture }}" ng-if="inputs.couverture">
+        </div>
+      </div>
+    </div>
+
+    <button class="form-submit" type="submit">Submit</button>
+  </form>
